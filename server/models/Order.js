@@ -84,19 +84,75 @@ const orderSchema = new mongoose.Schema(
     },
 
     // ===============================
+    // ORDER TYPE
+    // ===============================
+    // Immediate = normal order
+    // Scheduled = future date/time par order
+    //
+    // Existing orders ke liye default
+    // Immediate rahega.
+    orderType: {
+      type: String,
+      enum: ["Immediate", "Scheduled"],
+      default: "Immediate",
+    },
+
+    // ===============================
+    // SCHEDULED DATE & TIME
+    // ===============================
+    // Sirf Scheduled order ke liye use hoga.
+    //
+    // Immediate order mein ye null rahega.
+    scheduledFor: {
+      type: Date,
+      default: null,
+    },
+
+    // ===============================
+    // LOYALTY POINTS USED
+    // ===============================
+    // Customer ne is order mein kitne
+    // loyalty points redeem kiye.
+    loyaltyPointsUsed: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
+    // ===============================
+    // LOYALTY DISCOUNT
+    // ===============================
+    // Loyalty points se mila total
+    // discount amount.
+    loyaltyDiscount: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+
+    // ===============================
     // PAYMENT ID
     // ===============================
+    // Razorpay payment ID
+    // Same payment ID ko duplicate order ke liye
+    // use nahi kiya ja sakta.
     paymentId: {
       type: String,
       default: null,
+      unique: true,
+      sparse: true,
     },
 
     // ===============================
     // RAZORPAY ORDER ID
     // ===============================
+    // Same Razorpay order ko duplicate
+    // MongoDB orders ke saath use nahi karne denge.
     razorpayOrderId: {
       type: String,
       default: null,
+      unique: true,
+      sparse: true,
     },
 
     // ===============================
