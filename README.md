@@ -1,4 +1,4 @@
-# 🍽️ Restaurant AI System
+# 🍽️ Restaurant RK System
 
 An AI-powered restaurant management and online food ordering system built with the MERN stack.
 
